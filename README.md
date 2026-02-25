@@ -7,7 +7,7 @@ Prompts reference code — tool names, schema fields, enum values, business rule
 ## Install
 
 ```bash
-npm install strongly-skilled zod
+bun add strongly-skilled zod
 ```
 
 ## Quick Example
@@ -96,6 +96,19 @@ const mcpTool = await toMcpTool(reportFinding);
 ```
 
 Requires `zod-to-json-schema` as an additional peer dependency.
+
+## Development
+
+```bash
+bun install          # install dependencies
+bun run check        # type-check (tsc --noEmit)
+bun run lint         # lint + format check (Biome)
+bun run lint:fix     # auto-fix lint + format
+bun test             # run tests
+bun run ci           # check + lint + test
+```
+
+Tooling: [Bun](https://bun.sh) runtime, [Biome](https://biomejs.dev) lint/format, [Lefthook](https://github.com/evilmartians/lefthook) git hooks.
 
 ## Documentation
 
