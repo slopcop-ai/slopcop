@@ -1,4 +1,4 @@
-import type { z } from "zod";
+import { z } from "zod";
 import type { ToolDefinition } from "../core/types.js";
 
 // ─── MCP-compatible output types (no MCP SDK dependency) ───
@@ -28,21 +28,15 @@ export interface McpPromptDefinition {
 
 /**
  * Converts a strongly-skilled tool definition to an MCP-compatible
- * tool definition. Requires `zod-to-json-schema` as a peer dependency.
+ * tool definition. Uses Zod 4's native `z.toJSONSchema()` for schema conversion.
  *
  * @example
  * import { toMcpTool } from "strongly-skilled/mcp";
  * const mcpTool = toMcpTool(reportBias);
  */
-export async function toMcpTool(tool: ToolDefinition): Promise<McpToolDefinition> {
-	const { zodToJsonSchema } = await import("zod-to-json-schema");
-
-	const jsonSchema = zodToJsonSchema(tool.inputSchema, {
-		$refStrategy: "none",
-		target: "openApi3",
-	});
-
-	const { $schema: _, ...rest } = jsonSchema as Record<string, unknown>;
+export function toMcpTool(tool: ToolDefinition): McpToolDefinition {
+	const jsonSchema = z.toJSONSchema(tool.inputSchema) as Record<string, unknown>;
+	const { $schema: _, "~standard": _std, ...rest } = jsonSchema;
 
 	return {
 		name: tool.name as string,
@@ -78,8 +72,8 @@ export function toMcpPrompt(prompt: {
 /**
  * Converts an entire registry's tools to MCP tool definitions.
  */
-export async function registryToMcpTools(registry: {
+export function registryToMcpTools(registry: {
 	all: ToolDefinition[];
-}): Promise<McpToolDefinition[]> {
-	return Promise.all(registry.all.map(toMcpTool));
+}): McpToolDefinition[] {
+	return registry.all.map(toMcpTool);
 }
