@@ -1,0 +1,10 @@
+{
+	"name": "slopcop-examples",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"slopcop": "file:..",
+		"@anthropic-ai/sdk": "^0.39.0",
+		"zod": "^4.3.6"
+	}
+}
