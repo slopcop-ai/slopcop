@@ -97,6 +97,21 @@ const mcpTool = toMcpTool(reportFinding);
 // → { name, description, inputSchema: JSON Schema }
 ```
 
+## Examples
+
+The [`examples/`](./examples/) directory contains two runnable examples using a Code Review Agent domain:
+
+- **[`showcase/main.ts`](./examples/showcase/main.ts)** — single-file walkthrough of every core API in 4 steps (define domain → build registry → compose prompt → call LLM)
+- **[`cookbook/`](./examples/cookbook/)** — modular multi-file structure showing how to organize a real project (domain, prompts, MCP adapter, runner)
+
+Both examples use `@anthropic-ai/sdk` as the LLM client, but only in the final entrypoint (`run.ts` / `main.ts`). The domain definitions, tool schemas, and prompt composition are pure slopcop — swap the runner for any SDK or framework.
+
+```bash
+cd examples && bun install
+ANTHROPIC_API_KEY=sk-... bun run showcase/main.ts
+ANTHROPIC_API_KEY=sk-... bun run cookbook/run.ts
+```
+
 ## Development
 
 ```bash
@@ -106,6 +121,7 @@ bun install && bun run ci    # types + lint + tests
 ## Documentation
 
 - [Architecture](./docs/design/architecture.md) — design, type-level machinery, API reference
+- [Examples](./examples/) — runnable showcase and cookbook with a Code Review Agent
 - [Research](./docs/research/) — problem taxonomy, prior art survey, MCP analysis
 
 ## License

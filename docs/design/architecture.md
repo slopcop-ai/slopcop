@@ -23,6 +23,9 @@ slopcop/
 │   │   └── compose.ts        # compose, toolSection, enumSection
 │   └── mcp/
 │       └── index.ts          # toMcpTool, toMcpPrompt, registryToMcpTools
+├── examples/
+│   ├── showcase/main.ts      # Single-file demo of all core APIs
+│   └── cookbook/              # Modular multi-file example (domain, prompts, MCP, runner)
 ```
 
 **Exports map:**
