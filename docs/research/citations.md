@@ -1,6 +1,6 @@
 # Citations
 
-Complete bibliography of works referenced in the research and design of `strongly-skilled`.
+Complete bibliography of works referenced in the research and design of `slopcop`.
 
 ---
 
