@@ -21,7 +21,7 @@ export type Identifier<I extends string = string> = Brand<I, "Identifier">;
 export type ShapeKeys<T extends z.ZodRawShape> = Extract<keyof T, string>;
 
 /** Extract enum values from a ZodEnum as a union. */
-export type EnumValues<T extends z.ZodEnum<[string, ...string[]]>> = T["_def"]["values"][number];
+export type EnumValues<T extends z.ZodEnum> = z.infer<T>;
 
 /**
  * Recursively extract all leaf field paths from a ZodObject shape.
