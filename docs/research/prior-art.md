@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This document surveys existing approaches to structured, typed, or otherwise maintainable LLM prompt engineering. Each system is evaluated against the six problem categories identified in [problem-taxonomy.md](./problem-taxonomy.md). The survey reveals that no existing tool addresses all six — creating the design space for `strongly-skilled`.
+This document surveys existing approaches to structured, typed, or otherwise maintainable LLM prompt engineering. Each system is evaluated against the six problem categories identified in [problem-taxonomy.md](./problem-taxonomy.md). The survey reveals that no existing tool addresses all six — creating the design space for `slopcop`.
 
 ---
 
@@ -153,7 +153,7 @@ This document surveys existing approaches to structured, typed, or otherwise mai
 
 **Approach:** Protocol-level definitions for tools, prompts, and resources. Tools have required `inputSchema` (JSON Schema). See [mcp-analysis.md](./mcp-analysis.md) for detailed analysis.
 
-**Relevance:** MCP defines the *wire format* for tool/prompt metadata but provides no authoring-time type safety. The `strongly-skilled/mcp` adapter bridges this gap.
+**Relevance:** MCP defines the *wire format* for tool/prompt metadata but provides no authoring-time type safety. The `slopcop/mcp` adapter bridges this gap.
 
 ---
 
@@ -178,7 +178,7 @@ This document surveys existing approaches to structured, typed, or otherwise mai
 
 ## Comparative Matrix
 
-| Capability | Priompt | mdx-prompt | POML | TypeChat | ts-prompt | llm-exe | PromptL | MCP | AgentSkills | **strongly-skilled** |
+| Capability | Priompt | mdx-prompt | POML | TypeChat | ts-prompt | llm-exe | PromptL | MCP | AgentSkills | **slopcop** |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Compile-time tool name refs | - | - | - | - | - | - | - | - | - | Yes |
 | Auto-derived enum descriptions | - | - | - | - | - | - | - | - | - | Yes |
@@ -191,4 +191,4 @@ This document surveys existing approaches to structured, typed, or otherwise mai
 | Output validation | - | - | - | Yes | Yes | - | - | - | - | - |
 | Zero deps beyond Zod | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | Yes |
 
-The table shows that `strongly-skilled` occupies a unique niche: **prompt authoring correctness at compile time**. Existing tools address composition (Priompt), presentation (POML), output validation (TypeChat), or discovery (AgentSkills) — but none catch stale tool references, drifted descriptions, or broken lookup tables before the prompt is ever sent to an LLM.
+The table shows that `slopcop` occupies a unique niche: **prompt authoring correctness at compile time**. Existing tools address composition (Priompt), presentation (POML), output validation (TypeChat), or discovery (AgentSkills) — but none catch stale tool references, drifted descriptions, or broken lookup tables before the prompt is ever sent to an LLM.

@@ -1,6 +1,6 @@
 # Research
 
-Background research informing the design of `strongly-skilled`.
+Background research informing the design of `slopcop`.
 
 ## Contents
 

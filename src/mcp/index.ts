@@ -27,11 +27,11 @@ export interface McpPromptDefinition {
 }
 
 /**
- * Converts a strongly-skilled tool definition to an MCP-compatible
+ * Converts a slopcop tool definition to an MCP-compatible
  * tool definition. Uses Zod 4's native `z.toJSONSchema()` for schema conversion.
  *
  * @example
- * import { toMcpTool } from "strongly-skilled/mcp";
+ * import { toMcpTool } from "slopcop/mcp";
  * const mcpTool = toMcpTool(reportBias);
  */
 export function toMcpTool(tool: ToolDefinition): McpToolDefinition {

@@ -7,7 +7,7 @@
 
 ## Overview
 
-The Model Context Protocol defines a JSON-RPC 2.0 based protocol for communication between LLM hosts (clients) and capability providers (servers). It specifies three core primitive types: **Tools**, **Prompts**, and **Resources**. This analysis examines where the specification's type safety mechanisms are strong, where they have gaps, and where `strongly-skilled` can bridge those gaps.
+The Model Context Protocol defines a JSON-RPC 2.0 based protocol for communication between LLM hosts (clients) and capability providers (servers). It specifies three core primitive types: **Tools**, **Prompts**, and **Resources**. This analysis examines where the specification's type safety mechanisms are strong, where they have gaps, and where `slopcop` can bridge those gaps.
 
 ---
 
@@ -77,7 +77,7 @@ interface PromptArgument {
 
 This asymmetry means a prompt argument described as "The confidence level (high, medium, low)" has no machine-readable constraint — the LLM client must parse the prose description to understand valid values.
 
-**Implication for strongly-skilled:** The `strongly-skilled/mcp` adapter can export prompt definitions with arguments derived from Zod schemas, but the MCP protocol cannot carry the type information. The adapter should include the Zod-derived type description in the argument's `description` field as a workaround.
+**Implication for slopcop:** The `slopcop/mcp` adapter can export prompt definitions with arguments derived from Zod schemas, but the MCP protocol cannot carry the type information. The adapter should include the Zod-derived type description in the argument's `description` field as a workaround.
 
 ---
 
@@ -112,21 +112,21 @@ MCP specifies:
 
 ---
 
-## Where strongly-skilled Bridges the Gap
+## Where slopcop Bridges the Gap
 
-| MCP Gap | strongly-skilled Solution |
+| MCP Gap | slopcop Solution |
 |---------|--------------------------|
 | Tool `description` disconnected from `inputSchema` | `defineTool` auto-composes descriptions from Zod field `.describe()` annotations |
 | Prompt arguments lack type information | `toMcpPrompt` derives argument descriptions from Zod schemas, embedding type info in the `description` field |
 | No mechanism to ensure tool name uniqueness | `ToolRegistry` enforces compile-time uniqueness via TypeScript's type accumulation |
 | No relationship between tool names in prompts and tool definitions | `defineSystemPrompt` provides a type-safe `tool()` helper that constrains references to registered tools |
-| `_meta` is unstructured | `strongly-skilled` schemas can export metadata as typed records, though this is a convention rather than protocol enforcement |
+| `_meta` is unstructured | `slopcop` schemas can export metadata as typed records, though this is a convention rather than protocol enforcement |
 
 ---
 
 ## Adapter Design Implications
 
-The `strongly-skilled/mcp` adapter should:
+The `slopcop/mcp` adapter should:
 
 1. **Convert Zod schemas to JSON Schema 2020-12** via `zod-to-json-schema` for tool `inputSchema`
 2. **Embed composed descriptions** that include per-field documentation

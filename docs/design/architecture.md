@@ -1,15 +1,15 @@
-# Architecture: `strongly-skilled`
+# Architecture: `slopcop`
 
 ## Thesis
 
-Prompt construction is a type-checking problem. Existing tools validate prompt *composition* (Priompt), prompt *presentation* (POML), or LLM *output* (TypeChat). None validate prompt *authoring* — the act of writing prompts that correctly reference code artifacts. `strongly-skilled` makes TypeScript's compiler the enforcement mechanism for prompt-code synchronization.
+Prompt construction is a type-checking problem. Existing tools validate prompt *composition* (Priompt), prompt *presentation* (POML), or LLM *output* (TypeChat). None validate prompt *authoring* — the act of writing prompts that correctly reference code artifacts. `slopcop` makes TypeScript's compiler the enforcement mechanism for prompt-code synchronization.
 
 ---
 
 ## Package Structure
 
 ```
-strongly-skilled/
+slopcop/
 ├── src/
 │   ├── index.ts              # Re-exports core/
 │   ├── core/
@@ -36,7 +36,7 @@ strongly-skilled/
 
 **Dependencies:**
 - Peer: `zod ^3.22.0`
-- Optional peer: `zod-to-json-schema ^3.22.0` (only for `strongly-skilled/mcp`)
+- Optional peer: `zod-to-json-schema ^3.22.0` (only for `slopcop/mcp`)
 - Runtime: none
 
 ---
@@ -247,10 +247,10 @@ Recursively produces dotted paths for nested Zod objects (e.g., `"address.street
 
 ---
 
-## MCP Adapter (`strongly-skilled/mcp`)
+## MCP Adapter (`slopcop/mcp`)
 
 ```typescript
-import { toMcpTool, toMcpPrompt, registryToMcpTools } from "strongly-skilled/mcp";
+import { toMcpTool, toMcpPrompt, registryToMcpTools } from "slopcop/mcp";
 
 const mcpTools = registryToMcpTools(registry);
 // → McpToolDefinition[] with JSON Schema inputSchema + composed descriptions

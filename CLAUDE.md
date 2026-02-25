@@ -1,4 +1,4 @@
-# Project: strongly-skilled
+# Project: slopcop
 
 ## Runtime
 
@@ -21,7 +21,7 @@ Zod-first library for type-safe LLM prompt engineering. See `docs/design/archite
 
 - Core: `src/core/` — zero dependencies beyond `zod`
 - MCP adapter: `src/mcp/` — optional, requires `zod-to-json-schema`
-- Exports: `strongly-skilled` (core) and `strongly-skilled/mcp` (adapter)
+- Exports: `slopcop` (core) and `slopcop/mcp` (adapter)
 
 ## Documentation Style
 
