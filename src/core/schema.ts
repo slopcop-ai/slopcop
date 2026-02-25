@@ -4,7 +4,7 @@ import type { FieldPaths, ShapeKeys } from "./types.js";
 // ─── Described Enum Builder ───
 
 /** Return type of describedEnum — a ZodEnum with attached variant metadata. */
-export interface DescribedEnumSchema<V extends string> extends z.ZodEnum<[V, ...V[]]> {
+export interface DescribedEnumSchema<V extends string> extends z.ZodEnum<Record<V, V>> {
 	readonly variantDescriptions: ReadonlyMap<V, string>;
 	readonly composedDescription: string;
 }
@@ -26,10 +26,11 @@ export interface DescribedEnumSchema<V extends string> extends z.ZodEnum<[V, ...
 export function describedEnum<const V extends Record<string, string>>(
 	variants: V,
 ): DescribedEnumSchema<Extract<keyof V, string>> {
-	const values = Object.keys(variants) as [Extract<keyof V, string>, ...Extract<keyof V, string>[]];
+	type Key = Extract<keyof V, string>;
+	const values = Object.keys(variants) as [Key, ...Key[]];
 
-	const descriptions: ReadonlyMap<Extract<keyof V, string>, string> = new Map(
-		Object.entries(variants) as [Extract<keyof V, string>, string][],
+	const descriptions: ReadonlyMap<Key, string> = new Map(
+		Object.entries(variants) as [Key, string][],
 	);
 
 	const composedDescription = values.map((v) => `- "${v}": ${variants[v]}`).join("\n");
@@ -39,7 +40,7 @@ export function describedEnum<const V extends Record<string, string>>(
 	return Object.assign(schema, {
 		variantDescriptions: descriptions,
 		composedDescription,
-	}) as DescribedEnumSchema<Extract<keyof V, string>>;
+	}) as DescribedEnumSchema<Key>;
 }
 
 // ─── Schema Field Description Compositor ───
