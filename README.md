@@ -100,15 +100,12 @@ Requires `zod-to-json-schema` as an additional peer dependency.
 ## Development
 
 ```bash
-bun install          # install dependencies
-bun run check        # type-check (tsc --noEmit)
-bun run lint         # lint + format check (Biome)
-bun run lint:fix     # auto-fix lint + format
-bun test             # run tests
-bun run ci           # check + lint + test
+bun install       # then:
+bun run           # list available scripts
+bun run ci        # full check suite (types + lint + test)
 ```
 
-Tooling: [Bun](https://bun.sh) runtime, [Biome](https://biomejs.dev) lint/format, [Lefthook](https://github.com/evilmartians/lefthook) git hooks.
+[Bun](https://bun.sh) for runtime, [Biome](https://biomejs.dev) for lint/format, [Lefthook](https://github.com/evilmartians/lefthook) for git hooks. See `package.json` scripts and `CLAUDE.md` for conventions.
 
 ## Documentation
 
